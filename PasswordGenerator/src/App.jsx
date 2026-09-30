@@ -3,6 +3,7 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import {RefreshCcw} from 'lucide-react'
+import StrengthBar from './StrengthBar'
 
 
 function App() {
@@ -15,10 +16,17 @@ function App() {
         Gerador de senha
       </h1>
 
-      <div className='border border-black h-25 w-200 rounded-lg flex flex-row items-center gap-5 p-5'  >
-        <input type="text" name='campoSenha' id='campoSenha' className=' w-[80%] h-[80%] text-2xl focus:outline-none' />
-        <RefreshCcw className='hover:cursor-pointer'/>
-        <input type="button" value="Copiar senha" className='bg-purple-700 text-white h-10 w-30 rounded-xl font-[Arial] font-bold hover:bg-purple-800 hover:cursor-pointer' />
+      <div className='flex flex-col items-baseline gap-5'>
+        <div className='border border-black h-25 w-200 rounded-lg flex flex-row items-center gap-5 p-5'  >
+          <input type="text" name='campoSenha' id='campoSenha' className=' w-[80%] h-[80%] text-2xl focus:outline-none' />
+          <RefreshCcw className='hover:cursor-pointer'/>
+          <input type="button" value="Copiar senha" className='bg-purple-700 text-white h-10 w-30 rounded-xl font-[Arial] font-bold hover:bg-purple-800 hover:cursor-pointer' />
+        </div>
+        <StrengthBar></StrengthBar>
+      </div>
+
+      <div>
+        
       </div>
 
     </div>
