@@ -5,29 +5,35 @@ import StrengthBar from "./StrengthBar";
 function App() {
   const [password, setPassword] = useState("");
   const [passLength, setPassLength] = useState(0);
-  const [includeLower, setIncludeLower] = useState(true)
-  const [includeUpper, setIncludeUpper] = useState(false)
-  const [includeNum, setIncludeNum] = useState(false)
-  const [includeSym, setIncludeSym] = useState(false)
+  const [includeLower, setIncludeLower] = useState(true);
+  const [includeUpper, setIncludeUpper] = useState(false);
+  const [includeNum, setIncludeNum] = useState(false);
+  const [includeSym, setIncludeSym] = useState(false);
 
-  const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
-  const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const numbers = "0123456789";
-  const symbols = "!@#$%&*()-_=+^~§ªº/?;:.,<>\|";
+  const generatePassword = () => {
+    const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+    const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    const symbols = "!@#$%&*()-_=+^~§ªº/?;:.,<>\|";
 
- const characters =
-  (includeLower ? lowerCaseChars : "") +
-  (includeUpper ? upperCaseChars : "") +
-  (includeNum ? numbers : "") +
-  (includeSym ? symbols : "");
+    const characters =
+      (includeLower ? lowerCaseChars : "") +
+      (includeUpper ? upperCaseChars : "") +
+      (includeNum ? numbers : "") +
+      (includeSym ? symbols : "");
 
-  // const generatePassword = () => {
+    let generatedPassword = "";
+    for (let i = 0; i < passLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      generatedPassword += characters[randomIndex];
+    }
 
+    setPassword(generatedPassword);
+  };
 
-
-  // }
-
-
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(password);
+  };
 
   return (
     <div className="w-screen h-screen bg-white flex justify-baseline items-center flex-col gap-30 pt-10">
@@ -39,12 +45,18 @@ function App() {
             type="text"
             name="campoSenha"
             id="campoSenha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className=" w-[80%] h-[80%] text-2xl focus:outline-none"
           />
-          <RefreshCcw className="hover:cursor-pointer" />
+          <RefreshCcw
+            className="hover:cursor-pointer"
+            onClick={generatePassword}
+          />
           <input
             type="button"
             value="Copiar senha"
+            onClick={copyToClipboard}
             className="bg-purple-700 text-white h-10 w-30 rounded-xl font-[Arial] font-bold hover:bg-purple-800 hover:cursor-pointer"
           />
         </div>
@@ -53,13 +65,25 @@ function App() {
         </div>
       </div>
 
-      <div className="bg-purple-400 h-50  w-150 xl:w-200 p-5 flex flex-col gap-8 rounded-l">
+      <div className="bg-purple-400 h-50  w-150 xl:w-200 p-5 flex flex-col gap-8 rounded-lg">
         <div className="flex flex-col xl:flex-row  xl:gap-10 gap-1">
           <div className="flex flex-row gap-2 xl:gap-1 items-center">
-            <p className="text-xl font-[Arial]">Numero de caracteres da senha</p>
+            <p className="text-xl font-[Arial]">
+              Numero de caracteres da senha
+            </p>
             <p className="text-xl font-[Arial] ">{passLength}</p>
           </div>
-          <input value={passLength} type="range" onChange={(e) => setPassLength(e.target.value)} className="w-full"/>
+          <input
+            value={passLength}
+            type="range"
+            min={1}
+            max={50}
+            onChange={(e) => {
+              setPassLength(e.target.value);
+              generatePassword();
+            }}
+            className="w-full"
+          />
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-xl font-[Arial]">Caracteres utilizados</p>
@@ -72,7 +96,10 @@ function App() {
                   name="maiscula"
                   id=""
                   checked={includeUpper}
-                  onClick={() => setIncludeUpper(includeUpper => !includeUpper)}
+                  onClick={() =>
+                    setIncludeUpper((includeUpper) => !includeUpper)
+                  }
+                  onChange={generatePassword}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="maiuscula" className="font-[Arial]">
@@ -85,7 +112,10 @@ function App() {
                   name="minuscula"
                   id=""
                   checked={includeLower}
-                  onClick={() => setIncludeLower(includeLower => !includeLower)}
+                  onClick={() =>
+                    setIncludeLower((includeLower) => !includeLower)
+                  }
+                  onChange={generatePassword}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="minuscula" className="font-[Arial]">
@@ -98,7 +128,8 @@ function App() {
                   name="numeros"
                   id=""
                   checked={includeNum}
-                  onClick={() => setIncludeNum(includeNum => !includeNum)}
+                  onClick={() => setIncludeNum((includeNum) => !includeNum)}
+                  onChange={generatePassword}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="numeros" className="font-[Arial]">
@@ -111,12 +142,12 @@ function App() {
                   name="simbolos"
                   id=""
                   checked={includeSym}
-                  onClick={() => setIncludeSym(includeSym => !includeSym)}
-
+                  onClick={() => setIncludeSym((includeSym) => !includeSym)}
+                  onChange={generatePassword}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="simbolos" className="font-[Arial]">
-                  Símbolos 
+                  Símbolos
                 </label>
               </li>
             </ul>
