@@ -5,10 +5,33 @@ import StrengthBar from "./StrengthBar";
 function App() {
   const [password, setPassword] = useState("");
   const [passLength, setPassLength] = useState(0);
-  const [includeLower, setIncludeLower] = useState(true);
-  const [includeUpper, setIncludeUpper] = useState(false);
-  const [includeNum, setIncludeNum] = useState(false);
-  const [includeSym, setIncludeSym] = useState(false);
+  const [options, setOptions] = useState({
+    includeLower: true,
+    includeUpper: false,
+    includeNum: false,
+    includeSym: false,
+  });
+  // const [includeLower, setIncludeLower] = useState(false);
+  // const [includeUpper, setIncludeUpper] = useState(false);
+  // const [includeNum, setIncludeNum] = useState(false);
+  // const [includeSym, setIncludeSym] = useState(false);
+
+  const handleChange = (e) => {
+
+    const{name, checked} = e.target;
+
+    if(checked){
+      setOptions((prev) => ({...prev, [name]: true}))
+      return;
+    }
+
+    const totalActive = Object.values(options).filter(Boolean).length;
+
+    if(totalActive > 1){
+      setOptions((prev) => ({...prev, [name]:false}))
+    }
+
+  }
 
   const generatePassword = () => {
     const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -46,7 +69,11 @@ function App() {
             name="campoSenha"
             id="campoSenha"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setPassLength(e.target.value.length);
+
+            }}
             className=" w-[80%] h-[80%] text-2xl focus:outline-none"
           />
           <RefreshCcw
@@ -95,11 +122,8 @@ function App() {
                   type="checkbox"
                   name="maiscula"
                   id=""
-                  checked={includeUpper}
-                  onClick={() =>
-                    setIncludeUpper((includeUpper) => !includeUpper)
-                  }
-                  onChange={generatePassword}
+                  checked={options.includeUpper}
+                  onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="maiuscula" className="font-[Arial]">
@@ -111,11 +135,9 @@ function App() {
                   type="checkbox"
                   name="minuscula"
                   id=""
-                  checked={includeLower}
-                  onClick={() =>
-                    setIncludeLower((includeLower) => !includeLower)
-                  }
-                  onChange={generatePassword}
+                  checked={options.includeLower}
+                  
+                  onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="minuscula" className="font-[Arial]">
@@ -127,9 +149,8 @@ function App() {
                   type="checkbox"
                   name="numeros"
                   id=""
-                  checked={includeNum}
-                  onClick={() => setIncludeNum((includeNum) => !includeNum)}
-                  onChange={generatePassword}
+                  checked={options.includeNum}
+                  onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="numeros" className="font-[Arial]">
@@ -141,9 +162,8 @@ function App() {
                   type="checkbox"
                   name="simbolos"
                   id=""
-                  checked={includeSym}
-                  onClick={() => setIncludeSym((includeSym) => !includeSym)}
-                  onChange={generatePassword}
+                  checked={options.includeSym}
+                  onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
                 <label htmlFor="simbolos" className="font-[Arial]">
