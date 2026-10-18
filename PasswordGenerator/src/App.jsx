@@ -40,10 +40,10 @@ function App() {
     const symbols = "!@#$%&*()-_=+^~§ªº/?;:.,<>\|";
 
     const characters =
-      (includeLower ? lowerCaseChars : "") +
-      (includeUpper ? upperCaseChars : "") +
-      (includeNum ? numbers : "") +
-      (includeSym ? symbols : "");
+      (options.includeLower ? lowerCaseChars : "") +
+      (options.includeUpper ? upperCaseChars : "") +
+      (options.includeNum ? numbers : "") +
+      (options.includeSym ? symbols : "");
 
     let generatedPassword = "";
     for (let i = 0; i < passLength; i++) {
@@ -122,7 +122,8 @@ function App() {
                   type="checkbox"
                   name="maiscula"
                   id=""
-                  checked={options.includeUpper}
+                  // checked={options.includeUpper}
+                  ,
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
@@ -135,7 +136,8 @@ function App() {
                   type="checkbox"
                   name="minuscula"
                   id=""
-                  checked={options.includeLower}
+                  // checked={options.includeLower}
+                  ,
                   
                   onChange={handleChange}
                   className="size-5 roundend-lg "
@@ -149,7 +151,8 @@ function App() {
                   type="checkbox"
                   name="numeros"
                   id=""
-                  checked={options.includeNum}
+                  // checked={options.includeNum}
+                  ,
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
@@ -162,7 +165,8 @@ function App() {
                   type="checkbox"
                   name="simbolos"
                   id=""
-                  checked={options.includeSym}
+                  // checked={options.includeSym}
+                  ,
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
