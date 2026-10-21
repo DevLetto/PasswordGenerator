@@ -123,7 +123,7 @@ function App() {
                   name="maiscula"
                   id=""
                   // checked={options.includeUpper}
-                  ,
+                  
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
@@ -137,7 +137,7 @@ function App() {
                   name="minuscula"
                   id=""
                   // checked={options.includeLower}
-                  ,
+                  
                   
                   onChange={handleChange}
                   className="size-5 roundend-lg "
@@ -152,7 +152,7 @@ function App() {
                   name="numeros"
                   id=""
                   // checked={options.includeNum}
-                  ,
+                  
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
@@ -166,7 +166,7 @@ function App() {
                   name="simbolos"
                   id=""
                   // checked={options.includeSym}
-                  ,
+                  
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
