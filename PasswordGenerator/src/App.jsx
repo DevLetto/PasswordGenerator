@@ -31,6 +31,7 @@ function App() {
       setOptions((prev) => ({...prev, [name]:false}))
     }
 
+    
   }
 
   const generatePassword = () => {
@@ -89,6 +90,7 @@ function App() {
         </div>
         <div className="w-150 xl:w-200 flex flex-row items-baseline">
           <StrengthBar></StrengthBar>
+          false ou true: {Number(options.includeLower)}
         </div>
       </div>
 
@@ -120,9 +122,9 @@ function App() {
               <li className="flex flex-row  items-center gap-2">
                 <input
                   type="checkbox"
-                  name="maiscula"
+                  name="includeUpper"
                   id=""
-                  // checked={options.includeUpper}
+                  checked={options.includeUpper}
                   
                   onChange={handleChange}
                   className="size-5 roundend-lg "
@@ -134,9 +136,9 @@ function App() {
               <li className="flex flex-row items-center gap-2">
                 <input
                   type="checkbox"
-                  name="minuscula"
+                  name="includeLower"
                   id=""
-                  // checked={options.includeLower}
+                  checked={options.includeLower}
                   
                   
                   onChange={handleChange}
@@ -149,9 +151,9 @@ function App() {
               <li className="flex flex-row items-center gap-2">
                 <input
                   type="checkbox"
-                  name="numeros"
+                  name="includeNum"
                   id=""
-                  // checked={options.includeNum}
+                  checked={options.includeNum}
                   
                   onChange={handleChange}
                   className="size-5 roundend-lg "
@@ -163,10 +165,9 @@ function App() {
               <li className="flex flex-row items-center gap-2">
                 <input
                   type="checkbox"
-                  name="simbolos"
+                  name="includeSym"
                   id=""
-                  // checked={options.includeSym}
-                  
+                  checked={options.includeSym}
                   onChange={handleChange}
                   className="size-5 roundend-lg "
                 />
