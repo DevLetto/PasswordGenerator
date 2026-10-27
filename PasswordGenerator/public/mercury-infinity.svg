@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 300" fill="none">
+  <defs>
+    <linearGradient id="violet" x1="90" y1="70" x2="420" y2="245" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset="0.52" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="orbit" x1="70" y1="240" x2="435" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED"/>
+      <stop offset="0.55" stop-color="#C084FC"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <!-- Orbital ring -->
+  <ellipse cx="256" cy="150" rx="190" ry="66" transform="rotate(-24 256 150)" stroke="url(#orbit)" stroke-width="2.8"/>
+  <!-- Infinity mark -->
+  <path d="M256 150
+    C220 119 193 91 158 91
+    C119 91 92 117 92 150
+    C92 183 119 209 158 209
+    C193 209 220 181 256 150
+    C292 119 319 91 354 91
+    C393 91 420 117 420 150
+    C420 183 393 209 354 209
+    C319 209 292 181 256 150Z"
+    stroke="url(#violet)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Small orbital planet -->
+  <circle cx="411" cy="78" r="10" fill="#A855F7"/>
+  <circle cx="408" cy="75" r="3" fill="#E9D5FF" opacity=".85"/>
+  <!-- Four-point stars -->
+  <path d="M256 19 C259 34 263 38 278 41 C263 44 259 48 256 63 C253 48 249 44 234 41 C249 38 253 34 256 19Z" fill="#A855F7"/>
+  <path d="M256 237 C259 252 263 256 278 259 C263 262 259 266 256 281 C253 266 249 262 234 259 C249 256 253 252 256 237Z" fill="#A855F7"/>
+</svg>

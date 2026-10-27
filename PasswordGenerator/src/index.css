@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+
+@theme{
+
+    /* base */
+
+    --color-background: #0f0b1a;
+    --color-Top-bright: #2a1458;
+    --color-text: #f4f1ff;
+    --color-secondary-text: #a79fc4;
+    
+    /* Empashis */
+
+    --color-main-purple: #8b2be2;
+    --color-bright-purple: #c084fc;
+    --color-clipboard-first-color: #8b2be2;
+    --color-clipboard-second-color: #6d28d9;
+
+    /* glassCard */
+
+    --color-glassBG: rgba(255, 255, 255, 0.05);
+    --color-glassBorder: rgba(255, 255, 255, 0.1);
+
+    /* Password Strength */
+
+    --color-extremaly-weak: #4f4c56;
+    --color-weak: #ef4444;
+    --color-medium: #f59e0b;
+    --color-strong: #84cc16;
+    --color-very-strong: #22c55e;
+}
