@@ -148,13 +148,13 @@ function App() {
   }, [password]);
 
   return (
-    <div className="w-screen h-screen bg-background bg-[radial-gradient(ellipse_90%_48%_at_50%_0%,var(--color-top-bright)_0%,transparent_60%)] flex justify-center items-center flex-col gap-10 pt-10">
+    <div className="w-screen h-screen bg-background bg-[radial-gradient(ellipse_90%_80%_at_50%_0%,var(--color-top-bright)_0%,transparent_60%)] flex justify-center items-center flex-col gap-10 pt-10 ">
       {/* TITULO */}
       <h1 className="text-center text-4xl font-sans font-extrabold bg-linear-to-r from-text to-secondary-text bg-clip-text text-transparent ">
         Password Generator
       </h1>
 
-      <main className="border border-glassBorder bg-glassBG rounded-2xl w-120 md:w-160 flex flex-col items-center p-2">
+      <main className="border border-glassBorder bg-glassBG rounded-2xl w-120 md:w-160 flex flex-col items-center p-2 pb-10">
         <div className="flex flex-col items-center gap-5 ">
           {/* SESSAO DO TEXTO */}
           <div className="border border-glassBorder bg-[#110F18] h-20 w-115 md:w-150 rounded-2xl flex flex-row items-center gap-5 p-5">
@@ -188,13 +188,13 @@ function App() {
             <StrengthBar passStrength={passStrength}></StrengthBar>
           </div>
         </div>
-        <div className="bg-purple-400 h-50  w-115 md:w-150 p-5 flex flex-col gap-8 rounded-lg">
-          <div className="flex flex-col xl:flex-row  xl:gap-10 gap-1">
-            <div className="flex flex-row gap-2 xl:gap-1 items-center">
-              <p className="text-xl font-[Arial]">
-                Numero de caracteres da senha
+        <div className="bg-h-50  w-115 md:w-150  flex flex-col gap-8 rounded-lg mt-5">
+          <div className="flex flex-col gap-5 ">
+            <div className="flex flex-row gap-2 justify-between items-center">
+              <p className="text-md font-sans text-white">
+                Number of characters
               </p>
-              <p className="text-xl font-[Arial] ">{passLength}</p>
+              <p className="text-xl font-[Arial] text-bright-purple ">{passLength}</p>
             </div>
             <input
               value={passLength}
@@ -205,7 +205,33 @@ function App() {
                 setPassLength(e.target.value);
                 generatePassword();
               }}
-              className="w-full"
+              className="w-full 
+              h-2  appearance-none rounded-lg  cursor-pointer dark:bg-[#201D26] 
+
+                [&::-webkit-slider-runnable-track]:h-2
+                [&::-webkit-slider-runnable-track]:rounded-lg
+              [&::-webkit-slider-runnable-track]:bg-[#201D26]
+
+                [&::-moz-range-track]:h-2
+                [&::-moz-range-track]:rounded-lg
+              [&::-moz-range-track]:bg-bright-purple 
+
+                [&::-webkit-slider-thumb]:appearance-none 
+                [&::-webkit-slider-thumb]:w-5 
+                [&::-webkit-slider-thumb]:h-5 
+                [&::-webkit-slider-thumb]:rounded-full 
+                [&::-webkit-slider-thumb]:bg-bright-purple 
+                [&::-webkit-slider-thumb]:transition-all 
+                [&::-webkit-slider-thumb]:hover:bg-main-purple
+                
+                [&::-moz-range-thumb]:w-5 
+                [&::-moz-range-thumb]:h-5 
+                [&::-moz-range-thumb]:rounded-full 
+                [&::-moz-range-thumb]:bg-bright-purple
+                [&::-moz-range-thumb]:border-0 
+                [&::-moz-range-thumb]:transition-all 
+                [&::-moz-range-thumb]:hover:bg-main-purple" 
+              
             />
           </div>
           <div className="flex flex-col gap-2">

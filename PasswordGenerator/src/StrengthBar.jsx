@@ -27,13 +27,13 @@ function StrengthBar({ passStrength }) {
     if (passStrength == 5) return "text-very-strong";
   };
 
-  const getColorBar = () => {
-    if (passStrength == 1) return "bg-extremely-weak";
-    if (passStrength == 2) return "bg-weak";
-    if (passStrength == 3) return "bg-medium";
-    if (passStrength == 4) return "bg-strong";
-    if (passStrength == 5) return "bg-very-strong";
-  };
+ const progressColors = {
+  1: "[&::-webkit-progress-value]:bg-extremely-weak [&::-moz-progress-bar]:bg-extremely-weak",
+  2: "[&::-webkit-progress-value]:bg-weak [&::-moz-progress-bar]:bg-weak",
+  3: "[&::-webkit-progress-value]:bg-medium [&::-moz-progress-bar]:bg-medium",
+  4: "[&::-webkit-progress-value]:bg-strong [&::-moz-progress-bar]:bg-strong",
+  5: "[&::-webkit-progress-value]:bg-very-strong [&::-moz-progress-bar]:bg-very-strong",
+};
   return (
     <>
       <div >
@@ -43,7 +43,7 @@ function StrengthBar({ passStrength }) {
         </div>
         <progress
           // className="w-115 md:w-150 h-3 rounded-full [&::-moz-progress-bar]:rounded-full "
-          className={`appearance-none w-115 md:w-150 h-2 rounded-full overflow-hidden bg-[#201D26] [&::-webkit-progress-bar]:bg-[#201D26] [&::-webkit-progress-value]:${getColorBar()} [&::-moz-progress-bar]:${getColorBar()}`}
+          className={`appearance-none w-115 md:w-150 h-2 rounded-full overflow-hidden bg-[#201D26] [&::-webkit-progress-bar]:bg-[#201D26] ${progressColors[passStrength] ?? ""}`}
           value={passStrength}
           max={5}
         ></progress>
