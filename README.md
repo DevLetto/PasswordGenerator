@@ -11,7 +11,7 @@ The application allows users to generate customizable passwords quickly and easi
 
 
 
-![Mercury Password Generator](./screenshots/mercury-preview.png)
+
 
 ## ✨ Features
 
@@ -43,7 +43,7 @@ The design combines a modern aesthetic with custom visual elements to provide a 
 1. Clone the repository:
 
    ```bash
-   git clone [REPOSITORY_URL](https://github.com/DevLetto/PasswordGenerator)
+   git clone https://github.com/DevLetto/PasswordGenerator.git
    ```
 
 2. Navigate to the project directory:
