@@ -6,7 +6,7 @@
     /* base */
 
     --color-background: #0f0b1a;
-    --color-Top-bright: #2a1458;
+    --color-top-bright: #2a1458;
     --color-text: #f4f1ff;
     --color-secondary-text: #a79fc4;
     
@@ -24,9 +24,14 @@
 
     /* Password Strength */
 
-    --color-extremaly-weak: #4f4c56;
+    --color-extremely-weak: #4f4c56;
     --color-weak: #ef4444;
     --color-medium: #f59e0b;
     --color-strong: #84cc16;
     --color-very-strong: #22c55e;
+
+    /* text Fonts */
+
+     --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 }
