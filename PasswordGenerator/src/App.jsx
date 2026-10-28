@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { RefreshCcw } from "lucide-react";
 import StrengthBar from "./StrengthBar";
+import logo from "./assets/Logotipo_Mercury.png"
 
 function App() {
   const [password, setPassword] = useState("");
@@ -19,8 +20,7 @@ function App() {
 
   //Password requisitis
 
-  const minLenght = 4;
-  const idealLenght = 18;
+  const progress = Math.max(0, Math.min(100, ((passLength - 1) / 49) * 100));
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
@@ -148,13 +148,20 @@ function App() {
   }, [password]);
 
   return (
-    <div className="w-screen h-screen bg-background bg-[radial-gradient(ellipse_90%_80%_at_50%_0%,var(--color-top-bright)_0%,transparent_60%)] flex justify-center items-center flex-col gap-10 pt-10 ">
+    <div className="w-screen h-screen bg-background bg-[radial-gradient(ellipse_90%_80%_at_50%_0%,var(--color-top-bright)_0%,transparent_60%)] flex justify-center items-center flex-col gap-10 pt-10 relative ">
+
+      {/* Logo */}
+
+      <div className="absolute top-0 z-1">
+        <img src={logo} className="w-55 " alt="" />
+      </div>
+
       {/* TITULO */}
-      <h1 className="text-center text-4xl font-sans font-extrabold bg-linear-to-r from-text to-secondary-text bg-clip-text text-transparent ">
+      <h1 className="text-center text-4xl font-sans font-extrabold bg-linear-to-r from-text to-secondary-text bg-clip-text text-transparent z-2">
         Password Generator
       </h1>
 
-      <main className="border border-glassBorder bg-glassBG rounded-2xl w-120 md:w-160 flex flex-col items-center p-2 pb-10">
+      <main className="border border-glassBorder bg-glassBG rounded-2xl w-120 md:w-160 flex flex-col items-center p-2 pb-10 z-2">
         <div className="flex flex-col items-center gap-5 ">
           {/* SESSAO DO TEXTO */}
           <div className="border border-glassBorder bg-[#110F18] h-20 w-115 md:w-150 rounded-2xl flex flex-row items-center gap-5 p-5">
@@ -191,54 +198,61 @@ function App() {
         <div className="bg-h-50  w-115 md:w-150  flex flex-col gap-8 rounded-lg mt-5">
           <div className="flex flex-col gap-5 ">
             <div className="flex flex-row gap-2 justify-between items-center">
-              <p className="text-md font-sans text-white">
+              <p className="text-md font-sans text-secondary-text">
                 Number of characters
               </p>
-              <p className="text-xl font-[Arial] text-bright-purple ">{passLength}</p>
+              <p className="text-xl font-[Arial] text-bright-purple ">
+                {passLength}
+              </p>
             </div>
-            <input
-              value={passLength}
-              type="range"
-              min={1}
-              max={50}
-              onChange={(e) => {
-                setPassLength(e.target.value);
-                generatePassword();
-              }}
-              className="w-full 
-              h-2  appearance-none rounded-lg  cursor-pointer dark:bg-[#201D26] 
+            <div className="relative w-full flex items-center h-5">
+              {/* Trilho de fundo */}
+              <div className="absolute w-full h-2 rounded-full bg-[#201D26]" />
 
-                [&::-webkit-slider-runnable-track]:h-2
-                [&::-webkit-slider-runnable-track]:rounded-lg
-              [&::-webkit-slider-runnable-track]:bg-[#201D26]
+              {/* Progresso */}
+              <div
+                className="absolute h-2 rounded-full bg-bright-purple"
+                style={{
+                  width: `${progress}%`,
+                }}
+              />
 
-                [&::-moz-range-track]:h-2
-                [&::-moz-range-track]:rounded-lg
-              [&::-moz-range-track]:bg-bright-purple 
+              {/* Controle nativo transparente */}
+              <input
+                type="range"
+                min={1}
+                max={50}
+                value={passLength}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setPassLength(value);
+                  generatePassword();
+                }}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
 
-                [&::-webkit-slider-thumb]:appearance-none 
-                [&::-webkit-slider-thumb]:w-5 
-                [&::-webkit-slider-thumb]:h-5 
-                [&::-webkit-slider-thumb]:rounded-full 
-                [&::-webkit-slider-thumb]:bg-bright-purple 
-                [&::-webkit-slider-thumb]:transition-all 
-                [&::-webkit-slider-thumb]:hover:bg-main-purple
-                
-                [&::-moz-range-thumb]:w-5 
-                [&::-moz-range-thumb]:h-5 
-                [&::-moz-range-thumb]:rounded-full 
-                [&::-moz-range-thumb]:bg-bright-purple
-                [&::-moz-range-thumb]:border-0 
-                [&::-moz-range-thumb]:transition-all 
-                [&::-moz-range-thumb]:hover:bg-main-purple" 
-              
-            />
+              {/* Bolinha personalizada */}
+              <div
+                className="absolute w-4 h-4 rounded-full
+                  bg-bright-purple border-2 border-white
+                  pointer-events-none"
+                style={{
+                  left: `${progress}%`,
+                  transform: "translateX(-50%)",
+                }}
+              />
+            </div>
           </div>
+
           <div className="flex flex-col gap-2">
-            <p className="text-xl font-[Arial]">Caracteres utilizados</p>
+            <p className="text-lg font-sans text-secondary-text">
+              Utilized characters
+            </p>
             <nav className="flex flex-row gap-10 w-full">
-              <ul className="w-full columns-2 xl:columns-1 xl:flex xl:flex-row justify-between">
-                <li className="flex flex-row  items-center gap-2">
+              <ul className="w-full flex flex-row gap-3 justify-between">
+                <li
+                  className={`flex flex-row  items-center justify-center gap-2  w-40 h-12 rounded-lg border transition duration-200 ease-in-out ${options.includeUpper ? "border-main-purple bg-[#3A1D5A]" : "border-gray-700 hover:border-bright-purple"}`}
+                >
                   <input
                     type="checkbox"
                     name="includeUpper"
@@ -247,13 +261,39 @@ function App() {
                     onChange={(e) => {
                       handleChange(e);
                     }}
-                    className="size-5 roundend-lg "
+                    className="appearance-none
+                        w-5 h-5
+                        rounded-md
+                        flex
+                        items-center
+                        justify-center
+                        border-2 border-[#50465E]
+                        bg-[#201D26]
+                        cursor-pointer
+                        transition-all duration-200
+
+                        checked:bg-bright-purple
+                        checked:border-bright-purple
+
+                        hover:border-bright-purple
+
+                        checked:after:content-['✓']
+                        checked:after:text-white
+                        checked:after:flex
+                        checked:after:items-center
+                        checked:after:justify-center
+                        checked:after:text-sm"
                   />
-                  <label htmlFor="maiuscula" className="font-[Arial]">
-                    Letra maiúscula
+                  <label
+                    htmlFor="maiuscula"
+                    className="font-mono text-md text-white"
+                  >
+                    Uppercase
                   </label>
                 </li>
-                <li className="flex flex-row items-center gap-2">
+                <li
+                  className={`flex flex-row  items-center justify-center gap-2  w-40 h-12 rounded-lg border transition duration-200 ease-in-out ${options.includeLower ? "border-main-purple bg-[#3A1D5A]" : "border-gray-700 hover:border-bright-purple"}`}
+                >
                   <input
                     type="checkbox"
                     name="includeLower"
@@ -262,13 +302,36 @@ function App() {
                     onChange={(e) => {
                       handleChange(e);
                     }}
-                    className="size-5 roundend-lg "
+                    className="appearance-none
+                        w-5 h-5
+                        rounded-md
+                        flex
+                        items-center
+                        justify-center
+                        border-2 border-[#50465E]
+                        bg-[#201D26]
+                        cursor-pointer
+                        transition-all duration-200
+
+                        checked:bg-bright-purple
+                        checked:border-bright-purple
+
+                        hover:border-bright-purple
+
+                        checked:after:content-['✓']
+                        checked:after:text-white
+                        checked:after:flex
+                        checked:after:items-center
+                        checked:after:justify-center
+                        checked:after:text-sm"
                   />
-                  <label htmlFor="minuscula" className="font-[Arial]">
-                    Letra minúscula
+                  <label htmlFor="minuscula" className="font-mono text-md text-white">
+                    Lowercase
                   </label>
                 </li>
-                <li className="flex flex-row items-center gap-2 ">
+                <li
+                  className={`flex flex-row  items-center justify-center gap-2  w-40 h-12 rounded-lg border transition duration-200 ease-in-out ${options.includeNum ? "border-main-purple bg-[#3A1D5A]" : "border-gray-700 hover:border-bright-purple"}`}
+                >
                   <input
                     type="checkbox"
                     name="includeNum"
@@ -277,13 +340,36 @@ function App() {
                     onChange={(e) => {
                       handleChange(e);
                     }}
-                    className="size-5 roundend-lg "
+                    className="appearance-none
+                        w-5 h-5
+                        rounded-md
+                        flex
+                        items-center
+                        justify-center
+                        border-2 border-[#50465E]
+                        bg-[#201D26]
+                        cursor-pointer
+                        transition-all duration-200
+
+                        checked:bg-bright-purple
+                        checked:border-bright-purple
+
+                        hover:border-bright-purple
+
+                        checked:after:content-['✓']
+                        checked:after:text-white
+                        checked:after:flex
+                        checked:after:items-center
+                        checked:after:justify-center
+                        checked:after:text-sm"
                   />
-                  <label htmlFor="numeros" className="font-[Arial]">
-                    Números
+                  <label htmlFor="numeros" className="font-mono text-md text-white">
+                    Numbers
                   </label>
                 </li>
-                <li className="flex flex-row items-center gap-2">
+                <li
+                  className={`flex flex-row  items-center justify-center gap-2  w-40 h-12 rounded-lg border transition duration-200 ease-in-out ${options.includeSym ? "border-main-purple bg-[#3A1D5A]" : "border-gray-700 hover:border-bright-purple"}`}
+                >
                   <input
                     type="checkbox"
                     name="includeSym"
@@ -292,10 +378,31 @@ function App() {
                     onChange={(e) => {
                       handleChange(e);
                     }}
-                    className="size-5 roundend-lg "
+                    className="appearance-none
+                        w-5 h-5
+                        rounded-md
+                        flex
+                        items-center
+                        justify-center
+                        border-2 border-[#50465E]
+                        bg-[#201D26]
+                        cursor-pointer
+                        transition-all duration-200
+
+                        checked:bg-bright-purple
+                        checked:border-bright-purple
+
+                        hover:border-bright-purple
+
+                        checked:after:content-['✓']
+                        checked:after:text-white
+                        checked:after:flex
+                        checked:after:items-center
+                        checked:after:justify-center
+                        checked:after:text-sm"
                   />
-                  <label htmlFor="simbolos" className="font-[Arial]">
-                    Símbolos
+                  <label htmlFor="simbolos" className="font-mono text-md text-white">
+                    Symbols
                   </label>
                 </li>
               </ul>
