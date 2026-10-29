@@ -54,7 +54,6 @@ function App() {
       (options.includeNum ? numbers : "") +
       (options.includeSym ? symbols : "");
 
-    console.log(characters);
 
     let generatedPassword = "";
     for (let i = 0; i < passLength; i++) {
@@ -84,62 +83,45 @@ function App() {
 
     const hasTotal = Object.values(hasOptions).filter(Boolean).length;
 
-    console.log(hasTotal);
 
     if (hasTotal == 1 && passLength >= 0 && passLength < 7) {
       setPassStrength(1);
-      console.log("Caiu nesse if1-0");
     } else if (hasTotal == 1 && passLength >= 7 && passLength < 15) {
       setPassStrength(2);
-      console.log("Caiu nesse if1-7");
     } else if (hasTotal == 1 && passLength >= 15) {
       setPassStrength(3);
-      console.log("Caiu nesse if1-15");
     }
 
     if (hasTotal == 2 && passLength >= 0 && passLength < 5) {
       setPassStrength(1);
-      console.log("Caiu nesse if2-0");
     } else if (hasTotal == 2 && passLength >= 5 && passLength < 10) {
       setPassStrength(2);
-      console.log("Caiu nesse if2-5");
     } else if (hasTotal == 2 && passLength >= 10 && passLength < 14) {
       setPassStrength(3);
-      console.log("Caiu nesse if2-10");
     } else if (hasTotal == 2 && passLength >= 14 && passLength < 17) {
       setPassStrength(4);
-      console.log("Caiu nesse if2-14");
     } else if (hasTotal == 2 && passLength >= 17) {
       setPassStrength(5);
-      console.log("Caiu nesse if2-17");
     }
 
     if (hasTotal == 3 && passLength >= 1 && passLength < 9) {
       setPassStrength(2);
-      console.log("Caiu nesse if3-1");
     } else if (hasTotal == 3 && passLength >= 9 && passLength < 12) {
       setPassStrength(3);
-      console.log("Caiu nesse if3-9");
     } else if (hasTotal == 3 && passLength >= 12 && passLength < 14) {
       setPassStrength(4);
-      console.log("Caiu nesse if3-12");
     } else if (hasTotal == 3 && passLength >= 14) {
       setPassStrength(5);
-      console.log("Caiu nesse if3-14");
     }
 
     if (hasTotal == 4 && passLength >= 1 && passLength < 8) {
       setPassStrength(2);
-      console.log("Caiu nesse if4-1");
     } else if (hasTotal == 4 && passLength >= 8 && passLength < 11) {
       setPassStrength(3);
-      console.log("Caiu nesse if4-8");
     } else if (hasTotal == 4 && passLength >= 11 && passLength < 13) {
       setPassStrength(4);
-      console.log("Caiu nesse if4-11");
     } else if (hasTotal == 4 && passLength >= 13) {
       setPassStrength(5);
-      console.log("Caiu nesse if4-13");
     }
   };
 
@@ -152,7 +134,7 @@ function App() {
 
       {/* Logo */}
 
-      <div className="absolute top-0 z-1">
+      <div className="absolute top-0 left-2 z-1">
         <img src={logo} className="w-55 " alt="" />
       </div>
 
